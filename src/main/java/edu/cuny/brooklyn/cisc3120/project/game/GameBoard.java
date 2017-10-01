@@ -33,9 +33,9 @@ public class GameBoard {
 	}
 	
 	public void setTarget(int x, int y, TargetShape target) {
-		for (int i=0; i<target.getWidth(); i++) {
-			for (int j=0; j<target.getHeight(); j++) {
-				boardCells[y+j][x+i] = target.getTargetCells()[j][i];				
+		for (int i=0; i<target.getWidth() && x + i < boardCells[0].length; i++) {
+			for (int j=0; j<target.getHeight() && y + j < boardCells.length; j++) {
+				boardCells[y+j][x+i] = target.getTargetCells()[i][j];				
 			}
 		}
 	}

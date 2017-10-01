@@ -7,9 +7,17 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import edu.cuny.brooklyn.cisc3120.project.game.Target.PointTargetShape;
+import edu.cuny.brooklyn.cisc3120.project.game.Target.RectangleTargetShape;
 import edu.cuny.brooklyn.cisc3120.project.game.Target.TargetShape;
+import edu.cuny.brooklyn.cisc3120.project.game.Target.TriangleTargetShape;
+import edu.cuny.brooklyn.cisc3120.project.game.Weapon.Gun;
+import edu.cuny.brooklyn.cisc3120.project.game.Weapon.Rifle;
+import edu.cuny.brooklyn.cisc3120.project.game.Weapon.ShotGun;
 
 public class TargetGame {
+	
+	private Gun gun;
+	
 	private static Logger logger = LoggerFactory.getLogger(TargetGame.class);
 	
 	private final int GAME_TARGET_AREA_WIDTH = 80;
@@ -30,7 +38,25 @@ public class TargetGame {
 	
 	public void play() {
 		boolean won = false;
-		setTarget(new PointTargetShape());
+		
+		Random rnd = new Random();
+		
+		int r = rnd.nextInt(3);
+		int j = rnd.nextInt(2);
+		
+		if (r == 0)
+			setTarget(new PointTargetShape());
+			else if (r == 1) 
+				setTarget(new TriangleTargetShape());
+				else 
+					setTarget(new RectangleTargetShape());
+		
+		if (j == 0)
+			gun = new Rifle(gameBoard);
+			else
+				gun = new ShotGun(gameBoard);
+			
+		
 		gameBoard.plotBorder();
 		gameBoard.writeText(0, GAME_TARGET_AREA_HEIGHT-1, "Enter your target position (x, y):");
 		while(!won) {
@@ -59,6 +85,6 @@ public class TargetGame {
 	}
 	
 	private boolean targetHit(int xGuess, int yGuess) {
-		return gameBoard.getCell(xGuess, yGuess) == 'X';
+		return gun.withinShootingArea(xGuess, yGuess);
 	}
 }
