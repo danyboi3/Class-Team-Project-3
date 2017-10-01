@@ -39,6 +39,10 @@ public class GameBoard {
 			}
 		}
 	}
+
+	public void setPosition(int x, int y, char c) {
+		boardCells[x][y] = c;
+	}
 	
 	public void plotBorder() {
 		for (int i=0; i<width; i++) {
