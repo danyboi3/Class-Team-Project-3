@@ -1,11 +1,5 @@
 package edu.cuny.brooklyn.cisc3120.project.game;
 
-import java.util.Random;
-import java.util.Scanner;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import edu.cuny.brooklyn.cisc3120.project.game.Target.PointTargetShape;
 import edu.cuny.brooklyn.cisc3120.project.game.Target.RectangleTargetShape;
 import edu.cuny.brooklyn.cisc3120.project.game.Target.TargetShape;
@@ -13,18 +7,20 @@ import edu.cuny.brooklyn.cisc3120.project.game.Target.TriangleTargetShape;
 import edu.cuny.brooklyn.cisc3120.project.game.Weapon.Gun;
 import edu.cuny.brooklyn.cisc3120.project.game.Weapon.Rifle;
 import edu.cuny.brooklyn.cisc3120.project.game.Weapon.ShotGun;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.util.Random;
+import java.util.Scanner;
 
 public class TargetGame {
 
-	private Gun gun;
-
 	private static Logger logger = LoggerFactory.getLogger(TargetGame.class);
-
 	private final int GAME_TARGET_AREA_WIDTH = 80;
 	private final int GAME_TARGET_AREA_HEIGHT = 25;
-
 	GameBoard gameBoard;      // having its own dimension: cells
 	GameDisplay gameDisplay;  // having its own dimension: cells to characters
+	private Gun gun;
 	private Random rng;
 	private Scanner in;
 
