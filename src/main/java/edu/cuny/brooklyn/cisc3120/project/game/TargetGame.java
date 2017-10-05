@@ -65,8 +65,10 @@ public class TargetGame {
 
 			int xGuess = in.nextInt();
 			int yGuess = in.nextInt();
-			logger.debug("Player guessed x = " + xGuess + ", y =" + yGuess + ".");
-			if (targetHit(xGuess, yGuess)) {
+			logger.debug("Player guessed x = " + xGuess + ", y = " + yGuess + ".");
+			boolean hit = targetHit(xGuess, yGuess);
+			showHit(xGuess, yGuess, gun.getSpread());
+			if (hit) {
 				gameBoard.plotBorder();
 				gameBoard.writeText(0, GAME_TARGET_AREA_HEIGHT - 1, "You won. Game over.");
 				won = true;
@@ -78,11 +80,19 @@ public class TargetGame {
 		}
 	}
 
+	private void showHit(int x, int y, int spread) {
+		logger.debug(x + " " + y + " " + spread);
+		for(int i = x - spread; i <= x + spread; ++i) {
+			for(int j = y - spread; j <= y + spread; ++j) {
+				gameBoard.writeText(i, j, "O");
+			}
+		}
+	}
+
 	private void setTarget(TargetShape target) {
-		int x = rng.nextInt(GAME_TARGET_AREA_WIDTH);
-		int y = rng.nextInt(GAME_TARGET_AREA_HEIGHT);
+		int x = rng.nextInt(GAME_TARGET_AREA_WIDTH - 2);
+		int y = rng.nextInt(GAME_TARGET_AREA_HEIGHT - 2);
 		gameBoard.setTarget(x, y, target);
-		logger.debug("Target: " + x + "," + y);
 	}
 
 	private boolean targetHit(int xGuess, int yGuess) {

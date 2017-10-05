@@ -5,14 +5,15 @@ import edu.cuny.brooklyn.cisc3120.project.game.GameBoard;
 public class Rifle extends Gun {
 
 	private GameBoard board;
+	private int spread = 0;
 
 	public Rifle(GameBoard b) {
 		board = b;
 	}
 
 	@Override
-	public void shoot() {
-		// TODO
+	public int getSpread() {
+		return spread;
 	}
 
 	@Override

@@ -6,28 +6,29 @@ public class ShotGun extends Gun {
 
 	private GameBoard board;
 
+	private int spread = 1;
+
 	public ShotGun(GameBoard b) {
 		board = b;
 	}
 
 	@Override
-	public void shoot() {
-		// TODO 
-
+	public int getSpread() {
+		return spread;
 	}
 
 	@Override
 	public boolean withinShootingArea(int xGuess, int yGuess) {
 		int[][] board = this.board.getBoard();
 
-		if (xGuess >= board.length && yGuess >= board[0].length) {
+		if (xGuess < 0 || yGuess < 0) {
 			return false;
 		}
 
-		for (int i = xGuess - 1; i <= xGuess + 1; i++) {
-			for (int j = yGuess - 1; j <= yGuess + 1; j++) {
+		for (int i = xGuess - spread; i <= xGuess + spread; i++) {
+			for (int j = yGuess - spread; j <= yGuess + spread; j++) {
 
-				if (board[i][j] == 'X')
+				if (board.length > j && board[j].length > i && board[j][i] == 'X')
 					return true;
 
 			}

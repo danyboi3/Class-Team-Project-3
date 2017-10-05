@@ -26,20 +26,13 @@ public class GameBoard {
 		return boardCells;
 	}
 
-	public int getCell(int x, int y) {
-		return boardCells[y][x];
-	}
-
 	public void setTarget(int x, int y, TargetShape target) {
 		for (int i = 0; i < target.getWidth() && x + i < boardCells[0].length; i++) {
 			for (int j = 0; j < target.getHeight() && y + j < boardCells.length; j++) {
+				logger.debug("placing target point at " + (y + j) + " " + (x + i));
 				boardCells[y + j][x + i] = target.getTargetCells()[i][j];
 			}
 		}
-	}
-
-	public void setPosition(int x, int y, char c) {
-		boardCells[x][y] = c;
 	}
 
 	public void plotBorder() {
